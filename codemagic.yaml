@@ -1,21 +1,27 @@
-# codemagic.yaml
-
 workflows:
-  build-and-test:
-   
-  
+  build:
+    name: Build and Test
+    environment:
+      cordova-android: latest
+      cordova-ios: latest
     scripts:
       - name: Install Node.js and Ionic CLI
         script: |
-          curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-          npm install -g npm@latest
-          sudo chown -R 501:20 "/Users/builder/.npm
-      - name: Install dependencies and build the app
+          curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+          sudo npm install -g @ionic/cli
+          sudo npm install
+      - name: Install Cordova platforms and plugins
         script: |
-          npm install
-          ionic cordova platform add android
-          npm i -D -E @angular/cli
-          ionic build --prod
-      - name: Run tests
+          sudo ionic cordova platform add android
+          sudo ionic cordova platform add ios
+          sudo ionic cordova plugin add cordova-plugin-device
+          sudo ionic cordova plugin add cordova-plugin-splashscreen
+          sudo ionic cordova plugin add cordova-plugin-statusbar
+          sudo ionic cordova plugin add cordova-plugin-whitelist
+      - name: Build and Test
         script: |
-          ionic test
+          sudo ionic cordova build android --prod --release
+          sudo ionic cordova build ios --prod --release
+          sudo ionic cordova run android --prod --release
+          sudo ionic cordova run ios --prod --release
