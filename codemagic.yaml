@@ -1,6 +1,6 @@
 workflows:
   version: 
-   build_number: 1
+   build: 1
   version: "1.0.0"
 
   build-android:
