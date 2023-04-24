@@ -33,7 +33,9 @@ workflows:
  #           --no-interactive \
  #           --prod \
  #           --device
-            npm install -g @angular/cli
+            registry = https://registry.npmjs.org/
+
+#             npm install -g @angular/cli
             ng run app:ionic-cordova-build:production --platform=android --no-enc
 
 #     - name: Sign APK
