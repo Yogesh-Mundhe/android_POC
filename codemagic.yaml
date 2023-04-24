@@ -28,10 +28,11 @@ workflows:
             --noresources 
       - name: Build Android Cordova App
         script: |
-          - name: Install dependencies
-            script: npm install
-          - name: Build Android app
-            script: cordova build android
+          ionic cordova build android \
+            --release \
+            --no-interactive \
+            --prod \
+            --device
 
 #     - name: Sign APK
 #       script: | 
