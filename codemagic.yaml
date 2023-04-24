@@ -21,8 +21,4 @@ workflows:
           npm install
           # Run the automated tests
           ng test --watch=false
-    artifacts:
-      # Specify the files and directories you want to download as artifacts here
-      # For example:
-      # - build/
-      # - test-results/
+
