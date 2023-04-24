@@ -8,13 +8,13 @@ workflows:
       - name: Install Node.js and Ionic CLI
         script: |
           curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-          sudo npm install -g cordova ionic@${IONIC_CLI_VERSION}
+          npm install -g npm@latest
+          sudo chown -R 501:20 "/Users/builder/.npm
       - name: Install dependencies and build the app
         script: |
           npm install
-          ionic cordova prepare android --no-build
-          ionic cordova prepare ios --no-build
+          ionic cordova platform add android
+          npm i -D -E @angular/cli
           ionic build --prod
       - name: Run tests
         script: |
