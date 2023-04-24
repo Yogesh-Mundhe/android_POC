@@ -2,7 +2,7 @@ workflows:
   build:
     environment:
       # specify the desired node version
-      nodejs:
+      node:
         version: 14.x
       # specify the desired Cordova version
       cordova: 10.0.0
