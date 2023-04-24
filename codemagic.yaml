@@ -31,6 +31,5 @@ scripts:
           -keypass $CM_KEY_PASSWORD \
           $APK_PATH $CM_KEY_ALIAS         
  artifacts:
-   - build/
-   - coverage/
+   - platforms/android/app/build/outputs/**/*.apk
 
