@@ -2,10 +2,14 @@ version: 1.0.0
 
 workflows:
   main:
-    script:
-      - echo "Building Cordova app"
-      - cd cordova
-      - ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=myalias --storePassword=$ANDROID_STORE_PASSWORD --password=$ANDROID_PASSWORD
+   - echo "Installing Cordova"
+   - npm i -g cordova
+   - echo "Installing dependencies"
+   - npm install
+   - echo "Building Cordova app"
+   - ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=my-alias-name
+   - echo "Creating release APK"
+   - cd $BUILD_DIR && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1
     artifacts:
       - cordova/platforms/android/app/build/outputs/apk/release/*.apk
 
