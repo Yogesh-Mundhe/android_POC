@@ -1,8 +1,15 @@
 workflows:
-  build:
-    scripts:
-      - echo "Building the app"
-      - npm install
-      - ionic cordova platform add android@9.1.0 ios@6.1.0
-      - ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=myalias
+  version: 2
 
+  build-android:
+    environment:
+      node: "16.x"
+      cordova: "latest"
+      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.parallel=false"
+    scripts:
+      - npm install
+      - cordova platform add android@latest
+      - cordova plugin add cordova-plugin-ionic-webview@latest
+      - ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=android
+    artifacts:
+      - build/outputs/apk/**/*.apk
