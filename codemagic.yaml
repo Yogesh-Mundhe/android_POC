@@ -4,7 +4,7 @@ workflows:
   build-and-test:
     environment:
       vars:
-        - IONIC_APP_ID: YOUR_IONIC_APP_ID
+     
         - IONIC_BUILD_TYPE: PRODUCTION
         - IONIC_CLI_VERSION: LATEST
     scripts:
