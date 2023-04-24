@@ -28,13 +28,13 @@ workflows:
             --noresources 
       - name: Build Android Cordova App
         script: 
- #         ionic cordova build android \
+          ionic cordova build android 
  #           --release \
  #           --no-interactive \
  #           --prod \
  #           --device
-            registry = https://registry.npmjs.org/
-            ng run app:ionic-cordova-build:production --platform=android --no-enc
+#             registry = https://registry.npmjs.org/
+#             ng run app:ionic-cordova-build:production --platform=android --no-enc
 
 #     - name: Sign APK
 #       script: | 
