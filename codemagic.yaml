@@ -9,7 +9,7 @@ workflows:
    - echo "Building Cordova app"
    - ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=my-alias-name
    - echo "Creating release APK"
-   - cd $BUILD_DIR && jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1
+  
     artifacts:
       - cordova/platforms/android/app/build/outputs/apk/release/*.apk
 
