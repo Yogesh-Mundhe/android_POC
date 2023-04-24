@@ -11,5 +11,5 @@ workflows:
         echo '*** Building Android app ***'
         ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=myalias --storePassword=$ANDROID_STORE_PASSWORD --password=$ANDROID_PASSWORD
     environment:
-      FLAVOR: "main"
+
       BUILD_DIR: "platforms/android/app/build/outputs/apk/release"
