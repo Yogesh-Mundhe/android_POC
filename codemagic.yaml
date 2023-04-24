@@ -1,12 +1,8 @@
 workflows:
   build:
-    environment:
-      # specify the desired node version
-      node:
-        version: 14.x
-      # specify the desired Cordova version
-      cordova: 10.0.0
-      # specify the desired Android SDK version
-      android-sdk:
-        version: "30.0.2"
-    # your build steps here
+    scripts:
+      - echo "Building the app"
+      - npm install
+      - ionic cordova platform add android@9.1.0 ios@6.1.0
+      - ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=myalias
+
