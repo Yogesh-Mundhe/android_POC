@@ -28,11 +28,13 @@ workflows:
             --noresources 
       - name: Build Android Cordova App
         script: | 
-          ionic cordova build android \
-            --release \
-            --no-interactive \
-            --prod \
-            --device
+ #         ionic cordova build android \
+ #           --release \
+ #           --no-interactive \
+ #           --prod \
+ #           --device
+            ng run app:ionic-cordova-build:production --platform=android --no-enc
+
 #     - name: Sign APK
 #       script: | 
 #         APK_PATH=$(find platforms/android/app/build/outputs/apk/release -name "*.apk" | head -1)
