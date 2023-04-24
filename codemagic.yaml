@@ -1,5 +1,7 @@
 workflows:
-  version: 2
+  version: 
+   build_number: 1
+  version: 1.0.0
 
   build-android:
     environment:
