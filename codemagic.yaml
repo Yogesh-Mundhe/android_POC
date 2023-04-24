@@ -1,11 +1,6 @@
 workflows:
   build-test:
     name: Build and Test Workflow
-    environment:
-      # You can specify the environment variables required for your app here
-      # For example:
-      # - API_KEY=my_secret_api_key
-      # - DATABASE_URL=https://myapp.firebaseio.com
     scripts:
       # This script installs the required dependencies and builds the app
       - name: Build App
