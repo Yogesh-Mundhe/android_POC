@@ -2,8 +2,9 @@ workflows:
   build:
     name: Build and Test
     environment:
-      cordova-android: latest
-      cordova-ios: latest
+    node: latest
+      cordova: latest
+      android: latest
     scripts:
       - name: Install Node.js and Ionic CLI
         script: |
