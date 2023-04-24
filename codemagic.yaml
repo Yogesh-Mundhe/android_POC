@@ -1,18 +1,15 @@
+version: 1.0.0
 workflows:
-  version: 
-   build: 1
-  semver: 2.0.0
-
-
-  build-android:
-    environment:
-      node: "16.x"
-      cordova: "latest"
-      GRADLE_OPTS: "-Dorg.gradle.daemon=false -Dorg.gradle.parallel=false"
+  version: 2
+  build:
     scripts:
-      - npm install
-      - cordova platform add android@latest
-      - cordova plugin add cordova-plugin-ionic-webview@latest
-      - ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=android
-    artifacts:
-      - build/outputs/apk/**/*.apk
+      - |
+        echo '*** Installing dependencies ***'
+        npm install
+        npm install -g cordova ionic
+      - |
+        echo '*** Building Android app ***'
+        ionic cordova build android --prod --release -- --keystore=keystore.jks --alias=myalias --storePassword=$ANDROID_STORE_PASSWORD --password=$ANDROID_PASSWORD
+    environment:
+      FLAVOR: "main"
+      BUILD_DIR: "platforms/android/app/build/outputs/apk/release"
