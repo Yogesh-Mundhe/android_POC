@@ -1,76 +1,33 @@
 workflows:
-  android-workflow:
-    name: Ionic Cordova Android Workflow
-    max_build_duration: 120
+  build-test:
+    name: Build and Test Workflow
     environment:
-#       android_signing:
-#         - keystore_reference
-      groups:
-        - google_play
-      vars:
-        PACKAGE_NAME: "io.codemagic.ionicsample"
-        GOOGLE_PLAY_TRACK: alpha
-      node: v16.11.1
+      # You can specify the environment variables required for your app here
+      # For example:
+      # - API_KEY=my_secret_api_key
+      # - DATABASE_URL=https://myapp.firebaseio.com
     scripts:
-      - name: Install npm dependencies and update Cordova version
-        script: | 
-          npm install
-          npm ci # equivalent of npm install for CI systems.
-            # Requires package-lock.json or npm-shrinkwrap.json to be present
-          cvm install 9.0.0
-          cvm use 9.0.0 
-      - name: Setup Cordova Android platform
-        script: | 
-          ionic cordova platform remove android --nosave
-          ionic cordova platform add android \
-            --confirm \
-            --no-interactive \
-            --noresources 
-      - name: Build Android Cordova App
+      # This script installs the required dependencies and builds the app
+      - name: Build App
         script: |
-          package_type=$(defaults read ~/export_options.plist method)
-          identity=$(defaults read ~/export_options.plist signingCertificate)
-          team=$(defaults read ~/export_options.plist teamID)
-          profile=$(find '/Users/builder/Library/MobileDevice/Provisioning Profiles' -name "*.mobileprovision")
-          profile_uuid=$(grep UUID -A1 -a "$profile" | grep -io "[-A-F0-9]\{36\}")
-        
-          cat <<EOF > build.json
-              {
-                "ios": {
-                  "release": {
-                    "codeSignIdentity": "$identity",
-                    "developmentTeam": "$team",
-                    "packageType": "$package_type",
-                    "provisioningProfile": "$profile_uuid"
-                  }
-                }
-              }
-          EOF
-          ionic cordova build ios --release --device --buildConfig='build.json'
-
-#     - name: Sign APK
-#       script: | 
-#         APK_PATH=$(find platforms/android/app/build/outputs/apk/release -name "*.apk" | head -1)
-#         jarsigner \
-#           -sigalg SHA1withRSA \
-#           -digestalg SHA1 \
-#           -keystore $CM_KEYSTORE_PATH \
-#           -storepass $CM_KEYSTORE_PASSWORD \
-#           -keypass $CM_KEY_PASSWORD \
-#           $APK_PATH $CM_KEY_ALIAS         
+          # Install Node.js and required packages
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+          npm install -g @ionic/cli cordova-res
+          npm install
+          # Build the app for Android
+          ionic cordova platform add android
+          ionic cordova build android --prod --release --buildConfig
+      # This script runs the automated tests for the app
+      - name: Run Tests
+        script: |
+          # Install dependencies for testing
+          npm install -g @angular/cli
+          npm install
+          # Run the automated tests
+          ng test --watch=false
     artifacts:
-      - platforms/android/app/build/outputs/**/*.apk
-    publishing:
-      email:
-        recipients:
-          - user_1@example.com
-          - user_2@example.com
-        notify:
-          success: true
-          failure: false
-#       google_play:
-#         credentials: $GCLOUD_SERVICE_ACCOUNT_CREDENTIALS
-#         track: internal
-#         submit_as_draft: true       
-    
-  
+      # Specify the files and directories you want to download as artifacts here
+      # For example:
+      # - build/
+      # - test-results/
