@@ -29,17 +29,9 @@ workflows:
       - name: Build Android Cordova App
         script:
           - name: Install dependencies
-           script: npm install
+            script: npm install
           - name: Build Android app
-           script: cordova build android
-          
-#           ionic cordova build android 
- #           --release \
- #           --no-interactive \
- #           --prod \
- #           --device
-#             registry = https://registry.npmjs.org/
-#             ng run app:ionic-cordova-build:production --platform=android --no-enc
+            script: cordova build android
 
 #     - name: Sign APK
 #       script: | 
