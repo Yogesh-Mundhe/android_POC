@@ -2,7 +2,7 @@
 
 workflows:
   build-and-test:
-    environment:
+   
   
     scripts:
       - name: Install Node.js and Ionic CLI
