@@ -29,9 +29,9 @@ workflows:
       - name: Build Android Cordova App
         script:
           - name: Install dependencies
-          script: npm install
+           script: npm install
           - name: Build Android app
-          script: cordova build android
+           script: cordova build android
           
 #           ionic cordova build android 
  #           --release \
