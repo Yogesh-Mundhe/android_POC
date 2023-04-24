@@ -27,8 +27,13 @@ workflows:
             --no-interactive \
             --noresources 
       - name: Build Android Cordova App
-        script: 
-          ionic cordova build android 
+        script:
+          - name: Install dependencies
+          script: npm install
+          - name: Build Android app
+          script: cordova build android
+          
+#           ionic cordova build android 
  #           --release \
  #           --no-interactive \
  #           --prod \
