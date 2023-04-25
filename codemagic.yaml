@@ -7,7 +7,7 @@ workflows:
         ANDROID_HOME: /opt/android-sdk
     scripts:
       # Install required dependencies
-      - name: "Install dependencies"
+      - name: Install dependencies
         command: |
           # Install Node.js and required packages
           curl -sL https://deb.nodesource.com/setup_lts.x | bash -
