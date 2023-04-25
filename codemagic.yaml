@@ -2,7 +2,7 @@ workflows:
   build:
     name: Build Android App
     jobs:
-      build_job:
+      build:
         name: Build Job
         runs-on: ubuntu-latest
         steps:
