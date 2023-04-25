@@ -1,7 +1,12 @@
 workflows:
   ios-workflow:
     name: iOS workflow
-    npm: 6
+    integrations:
+      app_store_connect: codemagic
+    environment:
+      xcode: latest
+      node: v16.11.1
+      npm: 6
     cache:
       cache_paths:
         - $CM_BUILD_DIR/node_modules
