@@ -1,27 +1,22 @@
 workflows:
-  build_and_test:
-    environment:
-      vars:
-        # Add any required environment variables here
-        ANDROID_SDK_ROOT: /opt/android-sdk
-        ANDROID_HOME: /opt/android-sdk
+  build:
+    name: Build Android App
     scripts:
-      # Install required dependencies
-          command: |
-          # Install Node.js and required packages
-          curl -sL https://deb.nodesource.com/setup_lts.x | bash -
-          apt-get install -y nodejs
-          npm install -g cordova ionic
-          # Install Android SDK and accept licenses
-          mkdir -p /opt/android-sdk/cmdline-tools
-          cd /opt/android-sdk/cmdline-tools
-          curl -o sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-7583922_latest.zip
-          unzip sdk.zip
-          rm sdk.zip
-          echo y | ./bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "build-tools;30.0.3" "platforms;android-30" "extras;android;m2repository" "extras;google;m2repository"
-      # Build and test the app
-        name1: "Build and test app"
-        command1: |
-          ionic cordova platform add android
-          ionic cordova build android
-          ionic cordova run android --emulator --no-native-run
+      # Install Node.js and Cordova
+      - |
+        if [ ! -e "$HOME/.nvm/nvm.sh" ]; then
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+        fi
+        source "$HOME/.nvm/nvm.sh"
+        nvm install 14
+        npm install -g cordova@10.0.0
+      # Install the dependencies and build the app
+      - |
+        npm install
+        ionic cordova platform add android
+        npm install -g cordova-res
+        cordova-res android
+        ionic cordova build android --prod --release
+    artifacts:
+      # Define the path to the APK file
+      - app/platforms/android/app/build/outputs/apk/release/app-release.ap
