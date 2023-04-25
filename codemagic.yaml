@@ -1,8 +1,6 @@
 workflows:
   build:
     name: Build Android App
-    environment:
-      # Define environment variables for building the app
     scripts:
       # Install Node.js and Cordova
       - |
