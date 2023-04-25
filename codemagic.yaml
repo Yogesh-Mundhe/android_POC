@@ -3,7 +3,6 @@ workflows:
     name: Build Android App
     jobs:
       build-job:
-        name: Build Job
         runs-on: ubuntu-latest
         steps:
           # Checkout the code repository
