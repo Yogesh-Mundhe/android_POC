@@ -1,23 +1,38 @@
 workflows:
   build:
     name: Build Android App
-    scripts:
-      # Install Node.js and Cordova
-      - |
-        if [ ! -e "$HOME/.nvm/nvm.sh" ]; then
-            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-        fi
-        source "$HOME/.nvm/nvm.sh"
-        nvm install 14
-        npm install -g cordova@10.0.0
-      # Install the dependencies and build the app
-      - |
-        npm install
-        ionic cordova platform add android
-        npm install -g cordova-res
-        cordova-res android
-        ionic cordova build android --prod --release
-    artifacts:
-      # Define the path to the APK file
-      - app/platforms/android/app/build/outputs/apk/release/app-release.apk
+    jobs:
+      build_job:
+        name: Build Job
+        runs-on: ubuntu-latest
+        steps:
+          # Checkout the code repository
+          - name: Checkout code
+            uses: actions/checkout@v2
+
+          # Install Node.js and Cordova
+          - name: Install Node.js and Cordova
+            uses: actions/setup-node@v2
+            with:
+              node-version: 14
+          - name: Install Cordova
+            run: |
+              npm install -g cordova@10.0.0
+
+          # Install dependencies and build the app
+          - name: Install dependencies and build app
+            run: |
+              npm install
+              ionic cordova platform add android
+              npm install -g cordova-res
+              cordova-res android
+              ionic cordova build android --prod --release
+
+          # Upload the APK as an artifact
+          - name: Upload APK
+            uses: actions/upload-artifact@v2
+            with:
+              name: app-release
+              path: app/platforms/android/app/build/outputs/apk/release/app-release.apk
+
 
