@@ -1,37 +1,29 @@
 workflows:
-  build:
-    name: Build Android App
-    jobs:
-      build-job:
-        runs-on: ubuntu-latest
-        steps:
-          # Checkout the code repository
-          - name: Checkout code
-            uses: actions/checkout@v2
-
-          # Install Node.js and Cordova
-          - name: Install Node.js and Cordova
-            uses: actions/setup-node@v2
-            with:
-              node-version: 14
-          - name: Install Cordova
-            run: |
-              npm install -g cordova@10.0.0
-
-          # Install dependencies and build the app
-          - name: Install dependencies and build app
-            run: |
-              npm install
-              ionic cordova platform add android
-              npm install -g cordova-res
-              cordova-res android
-              ionic cordova build android --prod --release
-
-          # Upload the APK as an artifact
-          - name: Upload APK
-            uses: actions/upload-artifact@v2
-            with:
-              name: app-release
-              path: app/platforms/android/app/build/outputs/apk/release/app-release.apk
-
-
+  build_and_test_android:
+    name: Build and Test Android
+    environment:
+      # Set the Android SDK version
+      FLUTTER_VERSION: stable
+      ANDROID_API_LEVEL: 30
+      ANDROID_BUILD_TOOLS_VERSION: 30.0.2
+    scripts:
+      # Install dependencies
+      - name: Install Dependencies
+        command: flutter pub get
+      # Build the app
+      - name: Build App
+        command: flutter build apk
+      # Run tests
+      - name: Run Tests
+        command: flutter test
+    artifacts:
+      # Save the APK file as an artifact
+      - build/app/outputs/apk/release/app-release.apk
+    android:
+      # Set the target device to run tests on
+      flavors:
+        main:
+          target: emulator-5554
+      licenses:
+        # Accept Android licenses
+        - android-sdk-license-.+
