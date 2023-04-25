@@ -26,9 +26,7 @@ workflows:
             --no-interactive \
             --noresources \
             --save        
-      - name: Set up code signing settings on Xcode project
-        script: |
-          xcode-project use-profiles
+
       - name: Build iOS
         script: |
           package_type=$(defaults read ~/export_options.plist method)
