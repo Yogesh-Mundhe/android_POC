@@ -1,4 +1,5 @@
-name: Build and Publish Android App
+workflows:
+ name: Build and Publish Android App
 on:
   push:
     branches: [ main ]
