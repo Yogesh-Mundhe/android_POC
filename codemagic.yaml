@@ -1,8 +1,6 @@
 workflows:
   ios-workflow:
     name: iOS workflow
-    integrations:
-      app_store_connect: codemagic
     environment:
       xcode: latest
       node: v16.11.1
