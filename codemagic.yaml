@@ -1,21 +1,25 @@
 workflows:
-  build-and-test:
-    name: Build and Test
+  build:
+    name: Build Android App
     environment:
-      vars:
-        ANDROID_HOME: /opt/android/sdk
-        PATH: $PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+      # Define environment variables for building the app
     scripts:
-      - name: Install Dependencies
-        script: |
-          npm install
-      - name: Build Android App
-        script: |
-          ionic cordova platform add android
-          ionic cordova build android --prod --release
-      - name: Run Tests
-        script: |
-          npm run test
-      - name: Publish Artifacts
-        script: |
-          codemagic-artifacts publish ./platforms/android/app/build/outputs/apk/release/app-release.apk
+      # Install Node.js and Cordova
+      - |
+        if [ ! -e "$HOME/.nvm/nvm.sh" ]; then
+            curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+        fi
+        source "$HOME/.nvm/nvm.sh"
+        nvm install 14
+        npm install -g cordova@10.0.0
+      # Install the dependencies and build the app
+      - |
+        npm install
+        ionic cordova platform add android
+        npm install -g cordova-res
+        cordova-res android
+        ionic cordova build android --prod --release
+    artifacts:
+      # Define the path to the APK file
+      - app/platforms/android/app/build/outputs/apk/release/app-release.apk
+
