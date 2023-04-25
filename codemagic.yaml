@@ -1,7 +1,6 @@
 workflows:
   ios-workflow:
     name: iOS workflow
-    xcode: latest
     node: v16.11.1
     npm: 6
     cache:
