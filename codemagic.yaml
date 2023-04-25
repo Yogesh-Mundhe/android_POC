@@ -2,7 +2,7 @@ workflows:
   build:
     name: Build Android App
     environment:
-     node: v16.11.1
+     node: v18.16.0
     scripts:
       # Install Node.js and Cordova
       - |
