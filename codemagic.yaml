@@ -1,12 +1,6 @@
 workflows:
   ios-workflow:
     name: iOS workflow
-#     integrations:
-#       app_store_connect: codemagic
-#     environment:
-#       ios_signing:
-#         distribution_type: app_store
-#         bundle_identifier: io.codemagic.ionicsample
       xcode: latest
       node: v16.11.1
       npm: 6
