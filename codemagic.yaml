@@ -7,7 +7,7 @@ workflows:
         ANDROID_HOME: /opt/android-sdk
     scripts:
       # Install required dependencies
-      - name: Install dependencies
+      - name: "Install dependencies"
         command: |
           # Install Node.js and required packages
           curl -sL https://deb.nodesource.com/setup_lts.x | bash -
@@ -21,7 +21,7 @@ workflows:
           rm sdk.zip
           echo y | ./bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "build-tools;30.0.3" "platforms;android-30" "extras;android;m2repository" "extras;google;m2repository"
       # Build and test the app
-      - name: Build and test app
+      - name: "Build and test app"
         command: |
           ionic cordova platform add android
           ionic cordova build android
