@@ -1,9 +1,9 @@
 workflows:
   ios-workflow:
     name: iOS workflow
-      xcode: latest
-      node: v16.11.1
-      npm: 6
+    xcode: latest
+    node: v16.11.1
+    npm: 6
     cache:
       cache_paths:
         - $CM_BUILD_DIR/node_modules
