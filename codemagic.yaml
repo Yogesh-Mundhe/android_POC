@@ -9,6 +9,7 @@ workflows:
         fi
         source "$HOME/.nvm/nvm.sh"
         nvm install 14
+        nvm use 14
         npm install -g cordova@10.0.0
       # Install the dependencies and build the app
       - |
