@@ -96,7 +96,7 @@ workflows:
         script: |    
           set -x
           set -e
-          APK_PATH=$(find app/build/outputs/apk/release -name "*.apk" | head -1)
+          APK_PATH=$(find platforms/android/app/build/outputs/apk/release -name "*.apk" | head -1)
           jarsigner \
             -sigalg SHA1withRSA \
             -digestalg SHA1 \
