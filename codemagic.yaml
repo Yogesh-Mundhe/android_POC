@@ -1,4 +1,4 @@
-android-workflow:
+workflow:
   name: Android workflow
   environment:
     xcode: latest
