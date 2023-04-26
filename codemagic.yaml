@@ -2,16 +2,14 @@ workflows:
   android_build:
     name: Android Build
     environment:
+      docker:
+        image: circleci/android:api-30-nodejs-16.3.0
       vars:
         ANDROID_HOME: "/usr/local/android-sdk"
         GRADLE_OPTS: "-Dorg.gradle.daemon=false"
     scripts:
       - name: Install Dependencies
         script: |
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-          export PATH="/opt/homebrew/bin:$PATH"
-          brew install openjdk@8
-          brew install node
           npm install -g @ionic/cli cordova
           ionic cordova prepare android
       - name: Build Android
