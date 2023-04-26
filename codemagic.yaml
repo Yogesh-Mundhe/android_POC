@@ -2,8 +2,8 @@ workflows:
   android-workflow:
     name: Ionic Cordova Android Workflow
     environment:
-      android_signing:
-        - keystore_reference
+#       android_signing:
+#         - keystore_reference
       groups:
         - google_play
       vars:
