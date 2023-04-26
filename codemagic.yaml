@@ -94,8 +94,8 @@ workflows:
             --noresources 
       - name: Build Android
         script: |    
-          set -x
-          set -e
+#          set -x
+#          set -e
           APK_PATH=$(find platforms/android/app/build/outputs/apk/release -name "*.apk" | head -1)
           jarsigner \
             -sigalg SHA1withRSA \
