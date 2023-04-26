@@ -1,4 +1,4 @@
-workflow:
+workflows:
 android-workflow:
   name: Android workflow
   environment:
