@@ -4,6 +4,9 @@ workflows:
     environment:
 #       android_signing:
 #         - keystore_reference
+      xcode: latest
+      node: v16.11.1
+      npm: 6
       groups:
         - google_play
       vars:
