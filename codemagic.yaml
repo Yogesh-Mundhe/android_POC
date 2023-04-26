@@ -64,7 +64,7 @@ workflows:
     ionic-cordova-android-app:
         name: Ionic Cordova Android App
         environment:
-            node: latest
+            node: node: v16.11.1
         scripts: 
             - |
                 # install dependencies and update to Cordova version 9
