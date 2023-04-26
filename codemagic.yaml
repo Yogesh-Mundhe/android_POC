@@ -8,10 +8,10 @@ workflows:
     scripts:
       - name: Install Dependencies
         script: |
-          apt-get update
-          apt-get install -y openjdk-8-jdk-headless
-          curl -sL https://deb.nodesource.com/setup_16.x | bash -
-          apt-get install -y nodejs
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+          export PATH="/opt/homebrew/bin:$PATH"
+          brew install openjdk@8
+          brew install node
           npm install -g @ionic/cli cordova
           ionic cordova prepare android
       - name: Build Android
