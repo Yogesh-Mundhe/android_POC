@@ -69,7 +69,7 @@ workflows:
     name: Android workflow
     environment:
       xcode: latest
-      node: v16.11.1
+      node: 18.16.0
       npm: 6        
     cache:
       cache_paths:
