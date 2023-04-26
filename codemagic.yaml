@@ -10,7 +10,7 @@ workflows:
 #       vars:
 #         PACKAGE_NAME: "io.codemagic.ionicsample"
 #         GOOGLE_PLAY_TRACK: alpha
-      node: latest
+      node: v16.11.1
     scripts:
       - name: Install npm dependencies and update Cordova version
         script: | 
