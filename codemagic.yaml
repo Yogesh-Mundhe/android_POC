@@ -2,11 +2,16 @@ workflows:
   android_build:
     name: Android Build
     environment:
-      docker:
-        image: circleci/android:api-30-nodejs-16.3.0
       vars:
         ANDROID_HOME: "/usr/local/android-sdk"
         GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+      android:
+        components:
+          - platform-tools
+          - tools
+          - build-tools-29.0.3
+          - android-29
+          - extra-android-m2repository
     scripts:
       - name: Install Dependencies
         script: |
