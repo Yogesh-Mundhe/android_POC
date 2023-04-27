@@ -69,7 +69,7 @@ workflows:
     name: Android workflow
     environment:
        android_signing:
-        - keystore_reference
+        - my-release-key
        xcode: latest
        node: v16.11.1
        npm: 6        
