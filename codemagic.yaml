@@ -55,13 +55,14 @@ workflows:
     publishing:
       email:
         recipients:
-          - user_1@example.com
-          - user_2@example.com
+#           - user_1@example.com
+#           - user_2@example.com
+          - yogesh.mundhe@waiin.com
         notify:
           success: true
           failure: false
-      app_store_connect:
-        auth: integration
+#       app_store_connect:
+#         auth: integration
 
         # Configuration related to TestFlight (optional)
         # Note: This action is performed during post-processing.
