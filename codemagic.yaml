@@ -7,8 +7,8 @@ workflows:
     scripts:
       - name: Install Cordova
         script: npm install -g cordova@latest
-      - name: Install dependencies
-        script: cordova prepare
+#       - name: Install dependencies
+#         script: cordova prepare
       - name: Build IPA
         script: |
           package_type=$(defaults read ~/export_options.plist method)
