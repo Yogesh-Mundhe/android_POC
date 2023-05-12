@@ -3,10 +3,14 @@ workflows:
     name: iOS Build
     environment:
       vars:
-        XCODE_PROJECT: "YourProjectName.xcodeproj"
+        FLUTTER_VERSION: stable
     scripts:
       - name: Install dependencies
         script: |
+          # Install Node.js
+          curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+          
           # Install Cordova
           sudo npm install -g cordova
           
@@ -16,20 +20,31 @@ workflows:
           
           # Install CocoaPods
           sudo gem install cocoapods
+          
+          # Install Flutter
+          sudo apt-get install -y libglu1-mesa
+          git clone https://github.com/flutter/flutter.git -b $FLUTTER_VERSION
+          export PATH="$PATH:`pwd`/flutter/bin"
+          flutter precache
+          
+          # Install project dependencies
+          flutter pub get
+          cd ios
+          pod repo update
+          pod install
+          cd ..
       
       - name: Build IPA
         script: |
-          # Prepare the Cordova project
-          cordova prepare ios --no-build
-          
-          # Build the Cordova project
-          cordova build ios --release --device --no-build
-          
-          # Create the IPA file
-          xcodebuild -exportArchive -archivePath platforms/ios/build/device/YourProjectName.xcarchive -exportOptionsPlist exportOptions.plist -exportPath ./
-      
+          flutter build ios --release --no-codesign
+          cd ios
+          xcodebuild -workspace App.xcworkspace -scheme App -configuration Release -destination generic/platform=iOS -archivePath App.xcarchive clean archive
+          xcodebuild -exportArchive -archivePath App.xcarchive -exportOptionsPlist exportOptions.plist -exportPath ./
+          cd ..
+
       - name: Publish IPA
         script: |
           # Rename the IPA file with a unique name
-          mv YourProjectName.ipa YourProjectName-$(date +%Y%m%d%H%M%S).ipa
+          mv ios/App.ipa ios/App-$(date +%Y%m%d%H%M%S).ipa
           # Upload the IPA file to your desired distribution platform
+
