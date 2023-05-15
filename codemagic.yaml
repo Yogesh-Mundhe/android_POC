@@ -1,42 +1,19 @@
 workflows:
   main:
+    name: Build IPA
     environment:
-      node: latest
-
+      vars:
+        IONIC_CLI_VERSION: '6.16.3'
+        XCODE_VERSION: '12.5'
     scripts:
-      # Install Cordova dependencies
-      - name: Install Cordova dependencies
-        script: npm install -g cordova
-
-      # Add required platforms and plugins
-      - name: Add platforms and plugins
+      - name: Install dependencies
         script: |
-          cordova platform add ios
-          cordova plugin add cordova-plugin-xxx
-          cordova plugin add cordova-plugin-yyy
-
-      # Build iOS app
-      - name: Build iOS app
+          sudo npm install -g @ionic/cli@${IONIC_CLI_VERSION}
+      - name: Build IPA
         script: |
-          cordova build ios --release --device
-
-      # Archive iOS app
-      - name: Archive iOS app
-        script: |
-          xcodebuild archive -workspace ./platforms/ios/YourApp.xcworkspace -scheme YourApp -archivePath ./build/YourApp.xcarchive
-
-      # Export IPA file
-      - name: Export IPA file
-        script: |
-          xcodebuild -exportArchive -archivePath ./build/YourApp.xcarchive -exportOptionsPlist ./exportOptions.plist -exportPath ./build/YourApp.ipa
-
-      # Publish IPA file as an artifact
-      - name: Publish IPA file
-        script: |
-          curl -F "ipa=@./build/YourApp.ipa" \
-          -H "Authorization: Bearer $CM_API_TOKEN" \
-          -H "Content-Type: multipart/form-data" \
-          https://api.codemagic.io/artifacts/upload
-
+          ionic cordova platform add ios
+          ionic cordova build ios --prod --release --device --buildConfig build.json
+          mkdir -p $HOME/build/outputs/ipa
+          cp platforms/ios/build/device/*.ipa $HOME/build/outputs/ipa/app.ipa
     artifacts:
-      - build/YourApp.ipa
+      - $HOME/build/outputs/ipa/app.ipa
