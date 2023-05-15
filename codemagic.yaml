@@ -96,9 +96,9 @@ workflows:
 #         - keystore_reference
 #       groups:
 #         - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS - Put your google-services.json here)
-      xcode: latest
-      node: 12
-      npm: npm install -g npm@7        
+#       xcode: latest
+#       node: 12
+#       npm: 7        
     cache:
       cache_paths:
         - $CM_BUILD_DIR/node_modules
