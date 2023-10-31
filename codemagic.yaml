@@ -2,19 +2,27 @@ workflows:
   build:
     name: Build Android Cordova App
     environment:
-      # flutter: latest
-      node: latest
+      flutter: latest
 
     scripts:
+      - name: Use Node.js 14
+        script: |
+          nvm install 14
+          nvm use 14
+          npm install -g cordova@10.0.0
+          npm install -g ionic
+          cordova platform remove android
+          cordova platform add android@9.0.0
+
       - name: Install npm dependencies and update Cordova version
         script: |
           npm install
           npm ci # equivalent of npm install for CI systems.
                  # Requires package-lock.json or npm-shrinkwrap.json to be present
-          cordova platform remove android
-          cordova platform add android@9.0.0
+
       - name: Build Android Cordova App
         script: |
           ionic cordova build android --release --prod --device
+
     artifacts:
       - platforms/android/app/build/outputs/**/*.apk
