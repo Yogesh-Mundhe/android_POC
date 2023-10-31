@@ -8,8 +8,8 @@ workflows:
       #   - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS - Put your google-services.json here)
       xcode: 15.0.1
       node: v12.22.12
-      # npm: npm install -g npm@6
-      npm install -g npm@6
+      npm: 10.2.1
+      # npm install -g npm@6
 
       
     cache:
