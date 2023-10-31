@@ -2,8 +2,8 @@ workflows:
   build:
     name: Build Android Cordova App
     environment:
-      flutter: latest
-      # nodejs: latest
+      # flutter: latest
+      node: latest
 
     scripts:
       - name: Install npm dependencies and update Cordova version
