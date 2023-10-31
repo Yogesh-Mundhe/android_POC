@@ -2,9 +2,9 @@ workflows:
   # version: 2  # Use version 2 of Codemagic workflows
   build:
     name: Build and Sign APK
-    environment:
-      flutter: latest
-      nodejs: latest
+    # environment:
+    #   flutter: latest
+    #   nodejs: latest
 
     scripts:
       - name: Install npm dependencies and update Cordova version
