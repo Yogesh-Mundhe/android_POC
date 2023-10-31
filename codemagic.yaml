@@ -7,7 +7,7 @@ workflows:
       # groups:
       #   - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS - Put your google-services.json here)
       xcode: 15.0.1
-      node: 12
+      node: v12.22.12
       npm: 6        
     cache:
       cache_paths:
