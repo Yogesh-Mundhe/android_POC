@@ -4,8 +4,8 @@ workflows:
     environment:
       # android_signing:
       #   - keystore_reference
-      groups:
-        - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS - Put your google-services.json here)
+      # groups:
+      #   - google_play # <-- (Includes GCLOUD_SERVICE_ACCOUNT_CREDENTIALS - Put your google-services.json here)
       # xcode: 12.4
       node: 12
       npm: 6        
